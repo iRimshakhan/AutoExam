@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="textStyle">
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/gray_600</item>
+    </style>
+
+    <style name="headingTextStyle">
+        <item name="android:textColor">@color/gray_800</item>
+        <item name="android:textSize">@dimen/_16ssp</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+</resources>
