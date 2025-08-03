@@ -8,5 +8,6 @@
     <color name="page_backgroundColor">#1078B2F2</color>
     <color name="gray_600">#FF757575</color>
     <color name="gray_800">#FF424242</color>
-
+    <color name="transparent_gray">#4B757575</color>
+    <color name="gray100">#E8E9Eb</color>
 </resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomeActivity">
+
+    <EditText
+        android:id="@+id/edit_text_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/rounded_corner_background"
+        android:drawableLeft="@drawable/user__1_"
+        android:drawablePadding="@dimen/_10sdp"
+        android:drawableTint="@color/gray_600"
+        android:hint="Enter your email"
+        android:padding="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/active_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/background_gradient"
+        android:padding="@dimen/_12sdp"
+        android:text="Login"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_id" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/passive_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/button_rounded_corner_background"
+        android:padding="@dimen/_12sdp"
+        android:text="Register"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:layout_constraintTop_toBottomOf="@id/active_button" />
+
+    <TextView
+        android:id="@+id/active_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:fontFamily="@font/poppins"
+        android:text="Forgot Password?"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passive_button" />
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:fontFamily="@font/poppins"
+        android:text="Email"
+        android:textColor="@color/gray_800"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/active_text" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:fontFamily="@font/poppins"
+        android:text="continue"
+        android:textColor="@color/gray_600"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
