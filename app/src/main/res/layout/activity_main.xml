@@ -16,7 +16,6 @@
         android:background="@drawable/background_gradient"
         android:padding="@dimen/_20sdp"
         android:src="@drawable/file_text"
-        android:text="Hello World!"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,6 +41,7 @@
         android:gravity="center"
         android:minLines="2"
         android:text="AI-Powered Question Paper Generator"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"

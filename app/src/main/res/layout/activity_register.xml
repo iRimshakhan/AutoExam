@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/AutoExamGen"
         style="@style/headingTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,33 +41,34 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/Register"
         style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_16sdp"
         android:text="Register to create question papers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/AutoExamGen" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/Email"
+        style="@style/headingTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/poppins"
         android:text="Email"
-        android:textColor="@color/gray_800"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/Register" />
 
     <EditText
-        android:id="@+id/editTextEmailAddress"
+        android:id="@+id/editEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textStyle"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:background="@drawable/rounded_corner_background"
@@ -78,26 +79,26 @@
         android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView6" />
+        app:layout_constraintTop_toBottomOf="@id/Email" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/password"
+        style="@style/headingTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/poppins"
         android:text="Password"
-        android:textColor="@color/gray_800"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/editEmailAddress" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textStyle"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:background="@drawable/rounded_corner_background"
@@ -109,26 +110,27 @@
         android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView7"/>
+        app:layout_constraintTop_toBottomOf="@id/password"/>
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/ConfirmPassword"
+        style="@style/headingTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:fontFamily="@font/poppins"
         android:text="Confirm Password"
         android:textColor="@color/gray_800"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
     <EditText
-        android:id="@+id/editTextConfirmPassword"
+        android:id="@+id/editConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/textStyle"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:background="@drawable/rounded_corner_background"
@@ -140,19 +142,19 @@
         android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView8"/>
+        app:layout_constraintTop_toBottomOf="@id/ConfirmPassword"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/createButton"
+        style="@style/blueButtonTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_16sdp"
         android:background="@drawable/background_gradient"
         android:padding="@dimen/_12sdp"
         android:text="Create Account"
-        android:textStyle="bold"
         app:backgroundTint="@null"
-        app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@id/editConfirmPassword" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

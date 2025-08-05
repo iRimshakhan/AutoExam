@@ -12,8 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoExam">
         <activity
-            android:name=".FormActivity"
+            android:name=".ChooseSyllabusActivity"
             android:exported="false" />
+        <activity
+            android:name=".FormActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
