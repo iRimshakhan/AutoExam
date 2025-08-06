@@ -7,282 +7,283 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FormActivity">
-
-    <TextView
-        android:id="@+id/back_arrow"
-        android:layout_width="@dimen/_36sdp"
-        android:layout_height="@dimen/_36sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawableLeft="@drawable/arrow_left"
-        android:padding="@dimen/_5sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/PaperDetails"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:text="Paper Details"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintStart_toEndOf="@+id/back_arrow"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/QuestionType"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Question Type"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
-
-    <Spinner
-        android:id="@+id/spinnerQuestionType"
-        style="@style/textStyle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:padding="@dimen/_12sdp"
-        android:background="@drawable/rounded_corner_background"
-        app:layout_constraintTop_toBottomOf="@+id/QuestionType"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".FormActivity">
 
-    <TextView
-        android:id="@+id/NoOfQuestions"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Number of questions in each unit"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerQuestionType" />
+        <TextView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawableLeft="@drawable/arrow_left"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/NoOfQuesUnit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableTint="@color/gray_600"
-        android:hint="e.g., 6"
-        android:inputType="number"
-        android:maxLength="1"
-        android:padding="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NoOfQuestions"/>
-
-    <TextView
-        android:id="@+id/NameOfQP"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Name of Question Paper"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NoOfQuesUnit" />
-
-    <EditText
-        android:id="@+id/EditNameOfQP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableTint="@color/gray_600"
-        android:hint="e.g., Mathematics Question Paper"
-        android:padding="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NameOfQP"/>
-
-    <TextView
-        android:id="@+id/NameOfSub"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Name of Subject"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditNameOfQP" />
-
-    <EditText
-        android:id="@+id/EditNameOfSub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableTint="@color/gray_600"
-        android:hint="e.g., Mathematics"
-        android:padding="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NameOfSub"/>
-
-    <TextView
-        android:id="@+id/NameOfClg"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Name of College"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditNameOfSub" />
-
-    <EditText
-        android:id="@+id/EditNameOfClg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableTint="@color/gray_600"
-        android:hint="e.g., ABC"
-        android:padding="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/NameOfClg"/>
-
-    <TextView
-        android:id="@+id/date"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:text="Date"
-        android:textSize="@dimen/_14ssp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditNameOfClg" />
-
-    <EditText
-        android:id="@+id/EditDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:drawableLeft="@drawable/calendar_days"
-        android:background="@drawable/rounded_corner_background"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableTint="@color/gray_600"
-        android:hint="dd/mm/yyyy"
-        android:focusable="false"
-        android:padding="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date"/>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayoutMarksDuration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@+id/EditDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/PaperDetails"
+            style="@style/headingTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="@dimen/_16sdp">
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="Paper Details"
+            android:textSize="@dimen/_20ssp"
+            app:layout_constraintStart_toEndOf="@+id/back_arrow"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/Marks"
-                style="@style/headingTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Marks"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"/>
 
-            <EditText
-                android:id="@+id/EditMarks"
-                style="@style/textStyle"
-                android:layout_width="@dimen/_132sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/rounded_corner_background"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/gray_600"
-                android:hint="e.g., 100"
-                android:inputType="number"
-                android:maxLength="3"
-                android:padding="@dimen/_12sdp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/QuestionType"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Question Type"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_arrow" />
 
-        <LinearLayout
-            android:layout_width="926dp"
+        <Spinner
+            android:id="@+id/spinnerQuestionType"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
-            android:orientation="vertical">
+            android:background="@drawable/rounded_corner_background"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@+id/QuestionType" />
 
-            <TextView
-                android:id="@+id/Duration"
-                style="@style/headingTextStyle"
+        <TextView
+            android:id="@+id/NoOfQuestions"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Number of questions in each unit"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerQuestionType" />
+
+        <EditText
+            android:id="@+id/NoOfQuesUnit"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/gray_600"
+            android:hint="e.g., 6"
+            android:inputType="number"
+            android:maxLength="1"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/NoOfQuestions" />
+
+        <TextView
+            android:id="@+id/NameOfQP"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Name of Question Paper"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/NoOfQuesUnit" />
+
+        <EditText
+            android:id="@+id/EditNameOfQP"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/gray_600"
+            android:hint="e.g., Mathematics Question Paper"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/NameOfQP" />
+
+        <TextView
+            android:id="@+id/NameOfSub"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Name of Subject"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditNameOfQP" />
+
+        <EditText
+            android:id="@+id/EditNameOfSub"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/gray_600"
+            android:hint="e.g., Mathematics"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/NameOfSub" />
+
+        <TextView
+            android:id="@+id/NameOfClg"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Name of College"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditNameOfSub" />
+
+        <EditText
+            android:id="@+id/EditNameOfClg"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/gray_600"
+            android:hint="e.g., ABC"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/NameOfClg" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Date"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditNameOfClg" />
+
+        <EditText
+            android:id="@+id/EditDate"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:background="@drawable/rounded_corner_background"
+            android:drawableLeft="@drawable/calendar_days"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="@color/gray_600"
+            android:focusable="false"
+            android:hint="dd/mm/yyyy"
+            android:padding="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMarksDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/EditDate">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duration"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold" />
+                android:layout_marginStart="@dimen/_16sdp"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/EditDuration"
-                style="@style/textStyle"
-                android:layout_width="@dimen/_132sdp"
+                <TextView
+                    android:id="@+id/Marks"
+                    style="@style/headingTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marks"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditMarks"
+                    style="@style/textStyle"
+                    android:layout_width="@dimen/_132sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/rounded_corner_background"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableTint="@color/gray_600"
+                    android:hint="e.g., 100"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:padding="@dimen/_12sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="926dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/rounded_corner_background"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/gray_600"
-                android:hint="e.g., 3 hours"
-                android:inputType="number"
-                android:maxLength="1"
-                android:padding="@dimen/_12sdp" />
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Duration"
+                    style="@style/headingTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/EditDuration"
+                    style="@style/textStyle"
+                    android:layout_width="@dimen/_132sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/rounded_corner_background"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableTint="@color/gray_600"
+                    android:hint="e.g., 3 hours"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:padding="@dimen/_12sdp" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/NextButton"
@@ -297,7 +298,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutMarksDuration"/>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutMarksDuration" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,7 +1,13 @@
 package com.fahim.autoexam;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.provider.OpenableColumns;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +16,20 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.fahim.autoexam.databinding.ActivityChooseSyllabusBinding;
+import com.tom_roush.pdfbox.android.PDFBoxResourceLoader;
+import com.tom_roush.pdfbox.pdmodel.PDDocument;
+import com.tom_roush.pdfbox.text.PDFTextStripper;
+
+import java.io.InputStream;
 
 public class ChooseSyllabusActivity extends AppCompatActivity {
+    private static final String TAG = ChooseSyllabusActivity.class.getName();
     ActivityChooseSyllabusBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PDFBoxResourceLoader.init(getApplicationContext());
         binding = ActivityChooseSyllabusBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         EdgeToEdge.enable(this);
@@ -27,6 +40,66 @@ public class ChooseSyllabusActivity extends AppCompatActivity {
         });
         binding.backArrow.setOnClickListener(view -> {
             startActivity(new Intent(ChooseSyllabusActivity.this, FormActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+        binding.chooseFile.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/pdf");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(Intent.createChooser(intent, "Select PDF"), 1);
+//            startActivity(new Intent(ChooseSyllabusActivity.this, UploadPDFActivity.class));
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            Uri pdfUri = data.getData();
+            Log.e(TAG, "uri: "+pdfUri.toString());
+            readPDFContent(pdfUri);  // You'll create this function
+            String pdfName = getFileNameFromUri(pdfUri);
+            Intent intent = new Intent(ChooseSyllabusActivity.this, UploadPDFActivity.class);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            intent.putExtra("pdfUri", pdfUri.toString()); // This is correct
+            intent.putExtra("pdfName", pdfName);          // This too
+            startActivity(intent);
+
+        }
+    }
+
+    private String getFileNameFromUri(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getLastPathSegment();
+        }
+        return result;
+    }
+
+
+    public void readPDFContent(Uri uri) {
+        try {
+            ContentResolver contentResolver = getContentResolver();
+            InputStream inputStream = contentResolver.openInputStream(uri);
+            PDDocument document = PDDocument.load(inputStream);
+            // ParcelFileDescriptor fileDescriptor = getContentResolver().openFileDescriptor(uri, "r");
+            PDFTextStripper stripper = new PDFTextStripper();
+            String text = stripper.getText(document);
+            document.close();
+            Log.d("PDF_CONTENT", text);  // Or display in a TextView
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

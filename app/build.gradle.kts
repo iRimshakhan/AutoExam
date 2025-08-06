@@ -46,4 +46,5 @@ dependencies {
 
     implementation(libs.ssp.android)
     implementation(libs.sdp.android)
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
 }

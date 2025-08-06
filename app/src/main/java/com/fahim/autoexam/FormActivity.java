@@ -79,11 +79,13 @@ public class FormActivity extends AppCompatActivity {
                 Toast.makeText(FormActivity.this, "Select question type", Toast.LENGTH_SHORT).show();
             } else {
                 startActivity(new Intent(FormActivity.this, ChooseSyllabusActivity.class));
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
         binding.backArrow.setOnClickListener(view -> {
             startActivity(new Intent(FormActivity.this, HomeActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
     }
