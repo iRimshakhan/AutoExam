@@ -8,31 +8,34 @@
     android:background="@color/white"
     tools:context=".HomeActivity">
 
-    <TextView
-        android:id="@+id/back_arrow"
-        android:layout_width="@dimen/_36sdp"
-        android:layout_height="@dimen/_36sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:background="@drawable/rounded_corner_background"
-        android:drawableLeft="@drawable/arrow_left"
-        android:padding="@dimen/_5sdp"
-        android:textSize="@dimen/_20sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/hometitle"
-        style="@style/headingTextStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:text="Question Papers"
-        android:textSize="@dimen/_20ssp"
-        app:layout_constraintStart_toEndOf="@+id/back_arrow"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:src="@drawable/menu"
+            />
+
+        <TextView
+            style="@style/headingTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Question Papers"
+            android:textSize="@dimen/_20sdp"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/search_bar"
@@ -50,7 +53,7 @@
         android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hometitle" />
+        app:layout_constraintTop_toBottomOf="@id/title_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/questionListView"

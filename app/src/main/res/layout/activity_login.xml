@@ -11,7 +11,8 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LoginActivity">
+        tools:context=".LoginActivity"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/imageView"
@@ -130,7 +131,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_16sdp"
             android:background="@drawable/background_gradient"
-            android:padding="@dimen/_12sdp"
             android:text="Login"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_16sdp"
             android:background="@drawable/button_rounded_corner_background"
-            android:padding="@dimen/_12sdp"
             android:text="Register"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"

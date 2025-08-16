@@ -1,5 +1,6 @@
 <!-- res/drawable/bg_instagram_glass.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
     <gradient
         android:angle="135"
         android:centerColor="#8397df"
@@ -8,5 +9,4 @@
         android:gradientRadius="800"
         android:startColor="@color/light_purple"
         android:type="linear" />
-    <corners android:radius="16dp" />
 </shape>

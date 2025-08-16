@@ -15,21 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutoExam">
         <activity
-            android:name=".GenerateQuestionsActivity"
+            android:name=".ViewPDFActivity"
             android:exported="false" />
         <activity
-            android:name=".ManualSyllabusActivity"
+            android:name=".GeneratingActivity"
             android:exported="false" />
         <activity
             android:name=".UploadPDFActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ChooseSyllabusActivity"
             android:exported="false" />
         <activity
             android:name=".FormActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"

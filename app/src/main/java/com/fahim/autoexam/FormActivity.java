@@ -36,8 +36,7 @@ public class FormActivity extends AppCompatActivity {
                 "Select question type",
                 "MCQ",
                 "Short Answer",
-                "Long Answer",
-                "Mixed"
+                "Long Answer"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, questionTypes);
 
