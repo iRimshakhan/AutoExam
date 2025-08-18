@@ -26,8 +26,8 @@ public class ViewPDFActivity extends AppCompatActivity {
             return insets;
         });
         binding.backArrow.setOnClickListener(view -> {
-            startActivity(new Intent(ViewPDFActivity.this, UploadPDFActivity.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish();
         });
     }
 }

@@ -176,6 +176,7 @@ public class ChooseSyllabusActivity extends AppCompatActivity {
 
         binding.backArrow.setOnClickListener(view -> {
             startActivity(new Intent(this, FormActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
         binding.chooseFile.setOnClickListener(view -> {

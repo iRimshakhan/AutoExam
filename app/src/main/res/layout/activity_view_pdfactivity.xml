@@ -37,6 +37,15 @@
 
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/scrollable"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
+        app:layout_constraintBottom_toTopOf="@id/DownloadButton">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,6 +111,7 @@
 
     </LinearLayout>
 
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/DownloadButton"
