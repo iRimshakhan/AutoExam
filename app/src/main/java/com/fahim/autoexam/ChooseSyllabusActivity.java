@@ -111,7 +111,7 @@ public class ChooseSyllabusActivity extends AppCompatActivity {
 
 }
 */
-package com.fahim.autoexam;
+/*package com.fahim.autoexam;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -176,7 +176,7 @@ public class ChooseSyllabusActivity extends AppCompatActivity {
 
         binding.backArrow.setOnClickListener(view -> {
             startActivity(new Intent(this, FormActivity.class));
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
 
         binding.chooseFile.setOnClickListener(view -> {
@@ -211,4 +211,103 @@ public class ChooseSyllabusActivity extends AppCompatActivity {
     }
 
 
+}*/
+
+package com.fahim.autoexam;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.util.Log;
+
+import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.fahim.autoexam.databinding.ActivityChooseSyllabusBinding;
+
+public class ChooseSyllabusActivity extends AppCompatActivity {
+    private static final String TAG = "ChooseSyllabusActivity";
+    ActivityChooseSyllabusBinding binding;
+    ActivityResultLauncher<Intent> launcher;
+    private QuestionPaperData paperData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Get data from FormActivity
+        paperData = (QuestionPaperData) getIntent().getSerializableExtra("paperData");
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult o) {
+                        Intent data = o.getData();
+                        if (o.getResultCode() == RESULT_OK && data != null) {
+                            Uri pdfUri = data.getData();
+                            Log.e(TAG, "PDF URI: " + pdfUri);
+                            String pdfName = getFileNameFromUri(pdfUri);
+
+                            Intent intent = new Intent(ChooseSyllabusActivity.this, UploadPDFActivity.class);
+                            intent.putExtra("pdfUri", pdfUri.toString());
+                            intent.putExtra("pdfName", pdfName);
+                            intent.putExtra("paperData", paperData);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                        }
+                    }
+                });
+
+        binding = ActivityChooseSyllabusBinding.inflate(getLayoutInflater());
+        EdgeToEdge.enable(this);
+        setContentView(binding.getRoot());
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        binding.backArrow.setOnClickListener(view -> {
+            finish();
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        });
+
+        binding.chooseFile.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("application/pdf");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            launcher.launch(Intent.createChooser(intent, "Select PDF"));
+        });
+    }
+
+    private String getFileNameFromUri(Uri uri) {
+        String result = null;
+        if ("content".equals(uri.getScheme())) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (nameIndex >= 0) {
+                        result = cursor.getString(nameIndex);
+                    }
+                }
+            } finally {
+                if (cursor != null) cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getLastPathSegment();
+        }
+        return result;
+    }
 }

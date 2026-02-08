@@ -60,6 +60,79 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
+                android:id="@+id/Class"
+                style="@style/headingTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Class"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/ClassText"
+                style="@style/textStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:background="@drawable/rounded_corner_background"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/gray_600"
+                android:hint="e.g., TYBscIT"
+                android:padding="@dimen/_12sdp"/>
+
+            <TextView
+                android:id="@+id/NameOfSub"
+                style="@style/headingTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Name of Subject"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/EditNameOfSub"
+                style="@style/textStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:background="@drawable/rounded_corner_background"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/gray_600"
+                android:hint="e.g., Mathematics"
+                android:padding="@dimen/_12sdp"/>
+
+            <TextView
+                android:id="@+id/NameOfQP"
+                style="@style/headingTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Name of Question Paper"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/EditNameOfQP"
+                style="@style/textStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:background="@drawable/rounded_corner_background"
+                android:drawablePadding="@dimen/_10sdp"
+                android:drawableTint="@color/gray_600"
+                android:hint="e.g., Mathematics Question Paper"
+                android:padding="@dimen/_12sdp"/>
+
+
+            <TextView
                 android:id="@+id/QuestionType"
                 style="@style/headingTextStyle"
                 android:layout_width="wrap_content"
@@ -105,54 +178,6 @@
                 android:hint="e.g., 6"
                 android:inputType="number"
                 android:maxLength="1"
-                android:padding="@dimen/_12sdp"/>
-
-            <TextView
-                android:id="@+id/NameOfQP"
-                style="@style/headingTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="Name of Question Paper"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/EditNameOfQP"
-                style="@style/textStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:background="@drawable/rounded_corner_background"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/gray_600"
-                android:hint="e.g., Mathematics Question Paper"
-                android:padding="@dimen/_12sdp"/>
-
-            <TextView
-                android:id="@+id/NameOfSub"
-                style="@style/headingTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="Name of Subject"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"/>
-
-            <EditText
-                android:id="@+id/EditNameOfSub"
-                style="@style/textStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:background="@drawable/rounded_corner_background"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="@color/gray_600"
-                android:hint="e.g., Mathematics"
                 android:padding="@dimen/_12sdp"/>
 
             <TextView
@@ -268,8 +293,6 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:drawableTint="@color/gray_600"
                         android:hint="e.g., 3 hours"
-                        android:inputType="number"
-                        android:maxLength="1"
                         android:padding="@dimen/_12sdp" />
                 </LinearLayout>
             </LinearLayout>

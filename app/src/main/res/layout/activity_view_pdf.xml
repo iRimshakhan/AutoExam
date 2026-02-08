@@ -106,7 +106,7 @@
 
         </LinearLayout>
 
-        <include
+        <include android:id="@+id/nestedLayout"
             layout="@layout/preview" />
 
     </LinearLayout>

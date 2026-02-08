@@ -2,6 +2,7 @@ package com.fahim.autoexam;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -32,15 +33,17 @@ public class SplashScreenActivity extends AppCompatActivity {
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(binding.progressBar, "progress", 0, 100);
         progressAnimator.setDuration(3000); // 3 seconds
         progressAnimator.start();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+
+        new Handler().postDelayed(() -> {
+            SharedPreferences prefs = getSharedPreferences("autoexam_prefs", MODE_PRIVATE);
+            boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+            if (isLoggedIn) {
+                startActivity(new Intent(SplashScreenActivity.this, HomeActivity.class));
+            } else {
                 startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                finish();
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
+            finish();
         }, 3000);
-
-
     }
 }

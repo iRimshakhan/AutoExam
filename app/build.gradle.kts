@@ -46,5 +46,8 @@ dependencies {
 
     implementation(libs.ssp.android)
     implementation(libs.sdp.android)
-    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+    implementation(libs.pdfbox.android)
+    implementation(libs.generativeai)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
 }
