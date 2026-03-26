@@ -12,6 +12,7 @@ sdpAndroid = "1.1.1"
 sspAndroid = "1.1.1"
 generativeai = "0.9.0"
 room = "2.6.1"
+visionCommon = "17.3.0"
 
 
 [libraries]
@@ -28,6 +29,7 @@ ssp-android = { module = "com.intuit.ssp:ssp-android", version.ref = "sspAndroid
 generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+vision-common = { group = "com.google.mlkit", name = "vision-common", version.ref = "visionCommon" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

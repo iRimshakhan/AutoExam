@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/colorSurface"
     tools:context=".HomeActivity">
 
     <LinearLayout
@@ -111,7 +111,7 @@
         android:layout_margin="@dimen/_16sdp"
         android:fontFamily="@font/poppins"
         android:text="Email"
-        android:textColor="@color/gray_800"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +124,7 @@
         android:layout_margin="@dimen/_16sdp"
         android:fontFamily="@font/poppins"
         android:text="continue"
-        android:textColor="@color/gray_600"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/label" />

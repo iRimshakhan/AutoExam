@@ -32,10 +32,8 @@ public class GeminiAIHelper {
             String syllabusText,
             OnQuestionGeneratedListener listener
     ) {
-        // Create final variable for lambda
         final String finalSyllabusText;
 
-        // Truncate syllabus if too long (Gemini has token limits)
         if (syllabusText != null && syllabusText.length() > 15000) {
             finalSyllabusText = syllabusText.substring(0, 15000) + "\n... (syllabus truncated)";
         } else {
@@ -44,15 +42,13 @@ public class GeminiAIHelper {
 
         new Thread(() -> {
             try {
-                // Notify progress
                 notifyProgress(listener, "Connecting to AI...");
 
                 String prompt = buildPrompt(paperData, finalSyllabusText);
                 Log.d(TAG, "Prompt created, length: " + prompt.length());
 
-                notifyProgress(listener, "Analyzing syllabus...");
+                notifyProgress(listener, "Analyzing syllabus and pattern...");
 
-                // Create request body
                 JSONObject requestBody = new JSONObject();
                 JSONArray contents = new JSONArray();
                 JSONObject content = new JSONObject();
@@ -65,37 +61,32 @@ public class GeminiAIHelper {
                 contents.put(content);
                 requestBody.put("contents", contents);
 
-                // Optional: Add generation config for better control
                 JSONObject generationConfig = new JSONObject();
                 generationConfig.put("temperature", 0.7);
-                generationConfig.put("maxOutputTokens", 2048);
+                generationConfig.put("maxOutputTokens", 8192);
                 requestBody.put("generationConfig", generationConfig);
 
                 String jsonRequest = requestBody.toString();
-                Log.d(TAG, "Request body: " + jsonRequest);
+                Log.d(TAG, "Request body length: " + jsonRequest.length());
 
-                // Make API call
                 URL url = new URL(API_URL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
-                connection.setConnectTimeout(30000); // 30 seconds timeout
-                connection.setReadTimeout(30000);
+                connection.setConnectTimeout(60000);
+                connection.setReadTimeout(60000);
 
-                // Send request
                 notifyProgress(listener, "Generating questions...");
                 OutputStream os = connection.getOutputStream();
                 os.write(jsonRequest.getBytes(StandardCharsets.UTF_8));
                 os.flush();
                 os.close();
 
-                // Get response code
                 int responseCode = connection.getResponseCode();
                 Log.d(TAG, "Response Code: " + responseCode);
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    // Read success response
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
                     StringBuilder response = new StringBuilder();
@@ -104,8 +95,6 @@ public class GeminiAIHelper {
                         response.append(line);
                     }
                     reader.close();
-
-                    Log.d(TAG, "Response: " + response.toString());
 
                     String generatedText = parseResponse(response.toString());
 
@@ -116,7 +105,6 @@ public class GeminiAIHelper {
                     }
 
                 } else {
-                    // Read error response
                     BufferedReader errorReader = new BufferedReader(
                             new InputStreamReader(connection.getErrorStream(), StandardCharsets.UTF_8));
                     StringBuilder errorResponse = new StringBuilder();
@@ -141,124 +129,75 @@ public class GeminiAIHelper {
     }
 
     private String buildPrompt(QuestionPaperData paperData, String syllabusText) {
-        int numQuestions = 10;
-        try {
-            numQuestions = Integer.parseInt(paperData.getNoOfQuestionsPerUnit());
-        } catch (NumberFormatException ignored) {}
-
-        int totalMarks = 50;
-        try {
-            totalMarks = Integer.parseInt(paperData.getMarks());
-        } catch (NumberFormatException ignored) {}
-
         StringBuilder prompt = new StringBuilder();
 
-        prompt.append("You are an expert university examination question paper creator.\n\n");
+        prompt.append("You are an expert university exam paper creator.\n\n");
 
-        // Paper header info - AI should reproduce this at the top
-        prompt.append("**PAPER HEADER (print this exactly at the top of the output):**\n");
-//        prompt.append(paperData.getCollegeName()).append("\n");
-//        prompt.append("Exam: ").append(paperData.getQuestionPaperName()).append("\n");
-        prompt.append("Class: ").append(paperData.getClassName()).append("\n");
-        prompt.append("Subject: ").append(paperData.getSubjectName()).append("\n");
-        prompt.append("Date: ").append(paperData.getDate() != null ? paperData.getDate() : "________").append("\n");
-        prompt.append("Total Marks: ").append(totalMarks).append("\n");
-        prompt.append("Duration: ").append(paperData.getDuration()).append("\n");
-        prompt.append("\n\n");
+        // STEP 1 — Pattern for structure only
+        prompt.append("STEP 1 — ANALYZE THE PATTERN (structure only, do not copy questions):\n");
+        prompt.append("Read the following previous year question paper carefully.\n");
+        prompt.append("Extract ONLY the structure — number of questions, sections, marks per question,\n");
+        prompt.append("attempt instructions, question types.\n");
+        prompt.append("Do NOT copy or reuse any question from this paper.\n\n");
 
-        // Syllabus content
-        prompt.append("**SYLLABUS CONTENT (use this to frame questions):**\n");
-        prompt.append(syllabusText).append("\n\n");
-
-        // Question type specific instructions
-        String questionType = paperData.getQuestionType();
-
-        if ("MCQ".equalsIgnoreCase(questionType)) {
-            prompt.append(getMCQInstructions(numQuestions, totalMarks));
-        } else if ("Short Answer".equalsIgnoreCase(questionType)) {
-            prompt.append(getShortAnswerInstructions(numQuestions, totalMarks));
-        } else if ("Long Answer".equalsIgnoreCase(questionType)) {
-            prompt.append(getLongAnswerInstructions(numQuestions, totalMarks));
-        } else {
-            prompt.append(getMCQInstructions(numQuestions, totalMarks));
+        String patternText = paperData.getPatternPdfContent();
+        if (patternText != null && patternText.length() > 15000) {
+            patternText = patternText.substring(0, 15000) + "\n... (pattern paper truncated)";
         }
+        prompt.append("[PATTERN PAPER START]\n");
+        prompt.append(patternText != null ? patternText : "(not provided)").append("\n");
+        prompt.append("[PATTERN PAPER END]\n\n");
+
+        // STEP 2 — Syllabus as content source
+        prompt.append("STEP 2 — YOUR CONTENT SOURCE (use only this to write new questions):\n");
+        prompt.append("The following is the syllabus. All new questions must come from this content only.\n");
+        prompt.append("Do NOT use anything from the pattern paper as question content.\n\n");
+
+        prompt.append("[SYLLABUS START]\n");
+        prompt.append(syllabusText).append("\n");
+        prompt.append("[SYLLABUS END]\n\n");
+
+        // STEP 3 — Generation instructions
+        prompt.append("STEP 3 — GENERATE THE PAPER:\n");
+        prompt.append("Now generate a complete brand new question paper following these strict rules:\n");
+
+        prompt.append("1. Print this header exactly at the top:\n");
+        prompt.append("   Class: ").append(paperData.getClassName()).append("                           ");
+        prompt.append("   Subject: ").append(paperData.getSubjectName()).append("                           ");
+        prompt.append("   Date: ").append(paperData.getDate() != null ? paperData.getDate() : "________").append("\n");
+        prompt.append("   Duration: ").append(paperData.getDuration()).append("\n\n");
+
+        prompt.append("2. Follow the EXACT same structure as the pattern paper —\n");
+        prompt.append("   same number of questions, same sections, same marks per question, same total marks but this total marks should display on the header you can write it after duration on *right side* of the paper \n\n\n");
+        prompt.append("   exact same notes or instructions points before actual questions )\n\n");
+        prompt.append("   same attempt instructions (e.g. attempt any three)\n\n");
+
+        // --- ADDED NUMBERING LOGIC HERE ---
+        prompt.append("3. STRICT NUMBERING AND LABELING RULES:\n");
+        prompt.append("   - Every main question MUST start with 'Q.' followed by the number (e.g., Q.1, Q.2, Q.3).\n");
+        prompt.append("   - Every sub-question MUST start with a lowercase letter followed by a period (e.g., a., b., c., d., e., f.).\n");
+        prompt.append("   - Do NOT use bullet points (- or *) or Roman numerals unless the pattern paper specifically uses them.\n");
+        prompt.append("   - Ensure there is a newline between each sub-question.\n\n");
+
+        prompt.append("4. Every single question must be NEW and taken only from the syllabus content\n\n");
+
+        prompt.append("5. Formatting: Plain text only. Use only 'Q.1' and 'a.' for structure. Do NOT use markdown symbols like **, #, or __.\n\n");
+
+        prompt.append("6. Example Format to follow:\n");
+        prompt.append("   Q.1 Attempt any three of the following: 15\n");
+        prompt.append("   a. [Your New Question 1]\n");
+        prompt.append("   b. [Your New Question 2]\n");
+        prompt.append("   ...and so on.\n\n");
+
+        prompt.append("7. Do not include any answers or answer keys and please now don't write page number\n");
 
         return prompt.toString();
-    }
-
-    private String getMCQInstructions(int numQuestions, int totalMarks) {
-        int marksPerQuestion = numQuestions > 0 ? totalMarks / numQuestions : 1;
-
-        return "**TASK:**\n" +
-                "Generate exactly " + numQuestions + " Multiple Choice Questions.\n\n" +
-                "**OUTPUT FORMAT (strictly follow, plain text only, no markdown):**\n" +
-                "Print the paper header first, then a blank line, then:\n\n" +
-                "Q1. [Question text]\n" +
-                "    A) [Option A]\n" +
-                "    B) [Option B]\n" +
-                "    C) [Option C]\n" +
-                "    D) [Option D]\n\n" +
-                "Q2. [Next question]...\n\n" +
-                "**RULES:**\n" +
-                "- Total questions: " + numQuestions + "\n" +
-                "- Each MCQ carries " + marksPerQuestion + " mark(s)\n" +
-                "- Cover different topics evenly from the syllabus\n" +
-                "- Mix difficulty: 30% easy, 50% medium, 20% hard\n" +
-                "- All four options must be plausible\n" +
-                "- Do NOT include answers or answer keys\n" +
-                "- Do NOT use any markdown formatting (no **, no #, no ```)\n" +
-                "- Output plain text only\n\n" +
-                "Generate the complete question paper now:";
-    }
-
-    private String getShortAnswerInstructions(int numQuestions, int totalMarks) {
-        int marksPerQuestion = numQuestions > 0 ? totalMarks / (numQuestions/2) : 2;
-
-        return "**TASK:**\n" +
-                "Generate exactly " + numQuestions + " Short Answer Questions.\n\n" +
-                "**OUTPUT FORMAT (strictly follow, plain text only, no markdown):**\n" +
-                "Print the paper header first, then a blank line, then:\n\n" +
-                "Q1. [Question text] (" + marksPerQuestion + " marks)\n\n" +
-                "Q2. [Next question]...\n\n" +
-                "**RULES:**\n" +
-                "- Total questions: " + numQuestions + "\n" +
-                "- Each question carries " + marksPerQuestion + " marks\n" +
-                "- Questions should be answerable in 50-100 words\n" +
-                "- Use action verbs: Define, Explain, List, Describe, Differentiate, State\n" +
-                "- Cover different topics evenly from the syllabus\n" +
-                "- Do NOT include answers\n" +
-                "- Do NOT use any markdown formatting (no **, no #, no ```)\n" +
-                "- Output plain text only\n\n" +
-                "Generate the complete question paper now:";
-    }
-
-    private String getLongAnswerInstructions(int numQuestions, int totalMarks) {
-        int marksPerQuestion = numQuestions > 0 ? totalMarks / (numQuestions/2) : 5;
-
-        return "**TASK:**\n" +
-                "Generate exactly " + numQuestions + " Long Answer Questions.\n\n" +
-                "**OUTPUT FORMAT (strictly follow, plain text only, no markdown):**\n" +
-                "Print the paper header first, then a blank line, then:\n\n" +
-                "Q1. [Question text] (" + marksPerQuestion + " marks)\n\n" +
-                "Q2. [Next question]...\n\n" +
-                "**RULES:**\n" +
-                "- Total questions: " + numQuestions + "\n" +
-                "- Each question carries " + marksPerQuestion + " marks\n" +
-                "- Questions should require 200-300 word answers\n" +
-                "- Use analytical verbs: Analyze, Evaluate, Discuss, Compare, Justify, Elaborate\n" +
-                "- Cover major topics from the syllabus\n" +
-                "- May include sub-parts like (a), (b) for higher mark questions\n" +
-                "- Do NOT include answers\n" +
-                "- Do NOT use any markdown formatting (no **, no #, no ```)\n" +
-                "- Output plain text only\n\n" +
-                "Generate the complete question paper now:";
     }
 
     private String parseResponse(String responseBody) throws Exception {
         try {
             JSONObject jsonResponse = new JSONObject(responseBody);
 
-            // Check if there are candidates
             if (!jsonResponse.has("candidates")) {
                 Log.e(TAG, "No candidates in response: " + responseBody);
                 return "Error: Invalid API response";

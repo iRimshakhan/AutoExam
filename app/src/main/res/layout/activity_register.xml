@@ -11,7 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@color/white">
+    android:background="?attr/colorSurface">
 
     <ImageView
         android:id="@+id/imageView"
@@ -120,7 +120,6 @@
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:text="Confirm Password"
-        android:textColor="@color/gray_800"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

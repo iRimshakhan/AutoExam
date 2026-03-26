@@ -14,6 +14,8 @@ public class QuestionPaperData implements Serializable {
     private String duration;
     private String pdfContent;
     private String pdfName;
+    private String patternPdfContent;
+    private String patternPdfName;
 
     // Constructor
     public QuestionPaperData() {}
@@ -51,4 +53,10 @@ public class QuestionPaperData implements Serializable {
 
     public String getPdfName() { return pdfName; }
     public void setPdfName(String pdfName) { this.pdfName = pdfName; }
+
+    public String getPatternPdfContent() { return patternPdfContent; }
+    public void setPatternPdfContent(String patternPdfContent) { this.patternPdfContent = patternPdfContent; }
+
+    public String getPatternPdfName() { return patternPdfName; }
+    public void setPatternPdfName(String patternPdfName) { this.patternPdfName = patternPdfName; }
 }
